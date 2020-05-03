@@ -71,15 +71,15 @@ numberOfSamplesICA = 50000 #number of samples from the dataset for making ICA
 # WhiteningFilterspy.makeWhiteningFiltersFigure(whiteningFilters,whiteningFiltersFigureFileName)
 
 #Question 6
-# X = ICApy.getICAInputData(inputFileName, sampleSizeICA, numberOfSamplesICA)
-# X = ICApy.preprocess(X)
-# W = ICApy.getIC(X)
-#
-# PSpy.saveH5(ICResultsFileName,'IC',W)
-# ICApy.makeIdependentComponentsFigure(W,sampleSizeICA, ICFigureFileName)
+X = ICApy.getICAInputData(inputFileName, sampleSizeICA, numberOfSamplesICA)
+X = ICApy.preprocess(X)
+W = ICApy.getIC(X)
+
+PSpy.saveH5(ICResultsFileName,'IC',W)
+ICApy.makeIdependentComponentsFigure(W,sampleSizeICA, ICFigureFileName)
 
 #Question 7
-A = ICApy.estimateActivations(W)
-sparsenessMeasure = ICApy.estimateSparseness(A)
+A = ICApy.estimateSources(W,X)
+sparsenessMeasure = ICApy.estimateSourcesKurtosis(A)
 PSpy.saveH5(ICAActivationsResultsFileName,'A',A)
-ICApy.makeSparsenessMeasureFigure(A, ICAActivationsSparsenessFigureFileName)
+ICApy.makeKurtosisFigure(sparsenessMeasure, ICAActivationsSparsenessFigureFileName)

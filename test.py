@@ -1,6 +1,7 @@
 import h5py
 import matplotlib.pyplot as plt
 import numpy as np
+from scipy.stats import kurtosis
 from PIL import Image
 
 def main():
@@ -34,24 +35,26 @@ def main():
     # print((A-1)/A)
     # print(np.where(A>2,A,0))
     # print(A.T)
-    A = np.array([[[1,1],[1,1]],
-                  [[2,2],[2,2]],
-                  [[3,3],[3,3]]])
-    print(A.shape)
-    print(np.mean(A[0,:,:]))
-    print(A[1,:,:])
+    # A = np.array([[[1,1],[1,1]],
+    #               [[2,2],[2,2]],
+    #               [[3,3],[3,3]]])
+    # print(A.shape)
+    # print(np.mean(A[0,:,:]))
+    # print(A[1,:,:])
     # print(np.repeat)
     # print(np.mean(A,axis=1))
     # print(np.mean(A,axis=3))
     # print(np.mean(A))
     # #
     # A = []
-    # B = np.array([[1,2],[3,4]])
+    B = np.array([[1,2],[3,4]])
     # C = np.array([[2,1],[5,6]])
     # # print(np.mean(B,axis=0))
     # # print(np.mean(B,axis=1))
     # print(B)
     # print(np.append(A,C).reshape((2,2)))
+    B = np.reshape(B,(1,4))
+    print(min(min(B)))
 
 
 if __name__=='__main__':

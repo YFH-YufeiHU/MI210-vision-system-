@@ -3,6 +3,7 @@ import pylab
 from sklearn.decomposition import FastICA
 import PSpy
 import h5py
+from scipy.stats import kurtosis
 
 
 def getICAInputData(inputFileName, sampleSize,nSamples):
@@ -69,7 +70,8 @@ def estimateSources(W,X):
     Returns:
     S(numpy.array) the matrix of the sources of X
     """
-
+    y_ = np.dot(X,W)
+    return y_
 
 
 def estimateSourcesKurtosis(S):
@@ -79,12 +81,33 @@ def estimateSourcesKurtosis(S):
     Returns:
     K (numpy.array): kurtosis of each data point (size n,1) 
     """
-    #Write your function here
-    print("You should define the functione stimateSourcesKurtosis")
+    kur = np.zeros(S.shape[0])
+    for i in range(S.shape[0]):
+        kur[i] = kurtosis(S[i],fisher=True)
+    print(kur.shape)
+    print(kur)
+    return kur
 
 def makeKurtosisFigure(S,figureFileName):
-    #Write your function here
-    print("You should define the functione makeKurtosisFigure")
+    gaussian = np.random.normal(size = 50000)
+    X = np.linspace(min(S),max(S),1000)
+    kur = kurtosis(S)
+    pylab.figure(figsize=(12,6))
+    pylab.subplot(121)
+    pylab.hist(S,bins=X)
+    pylab.xlabel("Numbers")
+    pylab.xlabel("Numbers of kurtosis")
+    pylab.title("Histogram of kurtosis")
+    pylab.subplot(122)
+    pylab.hist(gaussian,bins=X)
+    pylab.xlabel("Numbers")
+    pylab.xlabel("Numbers of kurtosis")
+    pylab.title("Histogram of gaussian")
+    pylab.savefig(figureFileName)
+    pylab.show()
+    print(kur)
+    print(kurtosis(gaussian))
+
         
 def makeIdependentComponentsFigure(W, sampleSize,figureFileName): 
     W = W.reshape([-1,]+sampleSize)
